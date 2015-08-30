@@ -90,6 +90,22 @@ welcome = welcome, {{user}}!
 welcome = bienvenue, {{user}} !
 ```
 
+**Handling dynamic translations**
+
+You can also re-load webL10n, so it will translate all the elements on the page again (including the newly created elements). This is useful, for example, after an AJAX load call, after creating new DOM elements through Javascript code or when using some mobile app framework that copies the content to a new div, instead of directly displaying it. Just call:
+
+```javascript
+document.webL10n.reload();
+```
+
+Real-world example:
+
+```javascript
+$("#page-content").load("pagecontent.html", function() {
+	document.webL10n.reload(); // it will translate the strings on the loaded content
+});
+```
+
 
 Advanced usage
 --------------

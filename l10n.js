@@ -23,7 +23,7 @@
 /*jshint browser: true, devel: true, es5: true, globalstrict: true */
 'use strict';
 
-document.webL10n = (function(window, document, undefined) {
+document.webL10nProt = function(window, document, undefined) {
   var gL10nData = {};
   var gTextData = '';
   var gTextProp = 'textContent';
@@ -1149,6 +1149,11 @@ document.webL10n = (function(window, document, undefined) {
       return '{{' + key + '}}';
     },
 
+    // re-translates a page (useful after AJAX loads)
+    reload: function() {
+      return document.webL10n = document.webL10nProt(window, document);
+    },
+
     // debug
     getData: function() { return gL10nData; },
     getText: function() { return gTextData; },
@@ -1199,7 +1204,9 @@ document.webL10n = (function(window, document, undefined) {
       }
     }
   };
-}) (window, document);
+};
+
+document.webL10n = document.webL10nProt(window, document);
 
 // gettext-like shortcut for document.webL10n.get
 if (window._ === undefined) {
